@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Gallery - Upload & Share</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="background-heart">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="heartGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="50%" style="stop-color:#9b59b6;stop-opacity:1" />
+                    <stop offset="50%" style="stop-color:#f1c40f;stop-opacity:1" />
+                </linearGradient>
+                <linearGradient id="highlight" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.4" />
+                    <stop offset="50%" style="stop-color:#ffffff;stop-opacity:0" />
+                    <stop offset="100%" style="stop-color:#000000;stop-opacity:0.3" />
+                </linearGradient>
+            </defs>
+            <!-- Shadow layer -->
+            <path d="M50,90 C50,90 10,60 10,40 C10,25 20,15 30,15 C40,15 50,25 50,25 C50,25 60,15 70,15 C80,15 90,25 90,40 C90,60 50,90 50,90 Z" 
+                  fill="#000000" 
+                  opacity="0.3"
+                  transform="translate(2, 4)"/>
+            <!-- Base heart -->
+            <path d="M50,90 C50,90 10,60 10,40 C10,25 20,15 30,15 C40,15 50,25 50,25 C50,25 60,15 70,15 C80,15 90,25 90,40 C90,60 50,90 50,90 Z" 
+                  fill="url(#heartGradient)"/>
+            <!-- Highlight overlay -->
+            <path d="M50,90 C50,90 10,60 10,40 C10,25 20,15 30,15 C40,15 50,25 50,25 C50,25 60,15 70,15 C80,15 90,25 90,40 C90,60 50,90 50,90 Z" 
+                  fill="url(#highlight)"/>
+        </svg>
+    </div>
+    <div class="floating-hearts">
+        <div class="heart heart-purple">💜</div>
+        <div class="heart heart-yellow">💛</div>
+        <div class="heart heart-purple">💜</div>
+        <div class="heart heart-yellow">💛</div>
+        <div class="heart heart-purple">💜</div>
+        <div class="heart heart-yellow">💛</div>
+        <div class="heart heart-purple">💜</div>
+        <div class="heart heart-yellow">💛</div>
+        <div class="heart heart-purple">💜</div>
+        <div class="heart heart-yellow">💛</div>
+        <div class="heart heart-purple">💜</div>
+        <div class="heart heart-yellow">💛</div>
+        <div class="heart heart-purple">💜</div>
+        <div class="heart heart-yellow">💛</div>
+        <div class="heart heart-purple">💜</div>
+        <div class="heart heart-yellow">💛</div>
+    </div>
+    <div class="container">
+        <header>
+            <h1>📸 Memory Gallery</h1>
+            <p>Upload and share your precious moments with friends</p>
+        </header>
+
+        <div class="upload-section">
+            <button class="memory-button" onclick="window.location.href='memories.html'">💝 Your Memory</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        // Big heart hover effect
+        const backgroundHeart = document.querySelector('.background-heart');
+        const floatingHeartsContainer = document.querySelector('.floating-hearts');
+        
+        backgroundHeart.addEventListener('mouseenter', () => {
+            // Speed up floating hearts
+            floatingHeartsContainer.classList.add('fast-mode');
+            
+            // Add more hearts
+            for (let i = 0; i < 10; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart heart-extra ' + (Math.random() > 0.5 ? 'heart-purple' : 'heart-yellow');
+                heart.textContent = Math.random() > 0.5 ? '💜' : '💛';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 2 + 's';
+                heart.style.fontSize = (Math.random() * 2 + 1.5) + 'em';
+                floatingHeartsContainer.appendChild(heart);
+            }
+        });
+        
+        backgroundHeart.addEventListener('mouseleave', () => {
+            // Slow down floating hearts
+            floatingHeartsContainer.classList.remove('fast-mode');
+            
+            // Remove extra hearts
+            const extraHearts = document.querySelectorAll('.heart-extra');
+            extraHearts.forEach(heart => {
+                setTimeout(() => heart.remove(), 500);
+            });
+        });
+    </script>
+</body>
+</html>
